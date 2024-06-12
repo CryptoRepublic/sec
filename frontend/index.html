@@ -32,7 +32,8 @@
     </div>
     <script>
        window.addEventListener('message', function(event) {
-            if (event.data === 'validate' && document.referrer.includes('https://www.hokentech.tech/school/course/tw/lecture/3629537')) {
+            // Ensure the message is from the expected origin
+            if (event.origin === 'https://www.hokentech.tech' && event.data === 'validate') {
                 document.getElementById('content').style.display = 'block';
             }
         });
