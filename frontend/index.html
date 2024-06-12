@@ -26,11 +26,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
     <script>
-        function isValidParentURL() {
-            const desiredParentURL = 'https://www.hokentech.tech/school/course/tw/lecture/3629537/';
+        function isExecutionAllowed() {
             try {
-                const parentURL = window.parent.location.href;
-                return parentURL.startsWith(desiredParentURL);
+                const iframe = window.parent.document.querySelector('iframe[src="' + window.location.href + '"]');
+                return iframe && iframe.hasAttribute('data-allow-execution');
             } catch (e) {
                 // Se si verifica un errore durante l'accesso a window.parent,
                 // significa che la pagina non è all'interno di un iframe o che si trova in un dominio diverso.
@@ -38,8 +37,8 @@
             }
         }
 
-        if (isValidParentURL()) {
-            // Se l'URL della pagina padre è valido, crea dinamicamente gli elementi HTML e aggiungili al body.
+        if (isExecutionAllowed()) {
+            // Se l'esecuzione è consentita, crea dinamicamente gli elementi HTML e aggiungili al body.
             const h1 = document.createElement('h1');
             h1.textContent = 'Upload a photo of the watch';
             document.body.appendChild(h1);
@@ -60,9 +59,9 @@
             labelContainer.id = 'label-container';
             document.body.appendChild(labelContainer);
         } else {
-            // Se l'URL della pagina padre non è valido, mostra un messaggio di errore.
+            // Se l'esecuzione non è consentita, mostra un messaggio di errore.
             const p = document.createElement('p');
-            p.textContent = 'This content can only be loaded from a specific page.';
+            p.textContent = 'This content can only be executed when the iframe is embedded in a specific page.';
             document.body.appendChild(p);
         }
     </script>
