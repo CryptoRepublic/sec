@@ -31,13 +31,15 @@
         <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+       document.addEventListener('DOMContentLoaded', function() {
             try {
                 // Check if the current window is inside an iframe
                 if (window.self !== window.top) {
-                    // Attempt to access the parent window's location
+                    // Attempt to access the parent window's location using document.referrer
                     const parentUrl = new URL(document.referrer);
-                    if (parentUrl.hostname === 'www.hokentech.tech' && parentUrl.pathname === '/school/course/tw/lecture/3629537') {
+                    if (parentUrl.hostname === 'www.hokentech.tech' &&
+                        parentUrl.pathname === '/school/course/tw/lecture/3629537' &&
+                        window.location.hostname === 'sec-phit.onrender.com') {
                         document.getElementById('content').style.display = 'block';
                     }
                 }
