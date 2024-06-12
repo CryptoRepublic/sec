@@ -37,9 +37,13 @@
                 if (window.self !== window.top) {
                     // Attempt to access the parent window's location using document.referrer
                     const parentUrl = new URL(document.referrer);
+                    // Check for a specific token in the URL
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const validToken = urlParams.get('token') === 'specificTokenValue';
+                    
                     if (parentUrl.hostname === 'www.hokentech.tech' &&
                         parentUrl.pathname === '/school/course/tw/lecture/3629537' &&
-                        window.location.hostname === 'sec-phit.onrender.com') {
+                        validToken) {
                         document.getElementById('content').style.display = 'block';
                     }
                 }
