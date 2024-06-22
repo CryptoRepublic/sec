@@ -2,14 +2,14 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 
-    const helmet = require('helmet');
+    // const helmet = require('helmet');
     const rateLimit = require('express-rate-limit');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Use Helmet to set various HTTP headers for security
-app.use(helmet());
+//app.use(helmet());
 
 // Rate limiting to prevent brute force attacks
 const apiLimiter = rateLimit({
