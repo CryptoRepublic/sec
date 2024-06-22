@@ -2,8 +2,21 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 
+    const helmet = require('helmet');
+    const rateLimit = require('express-rate-limit');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Use Helmet to set various HTTP headers for security
+app.use(helmet());
+
+// Rate limiting to prevent brute force attacks
+const apiLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // limit each IP to 100 requests per windowMs
+});
+app.use('/api/', apiLimiter);
 
 // Middleware to serve static files
 app.use(express.static(path.join(__dirname, '../frontend')));
