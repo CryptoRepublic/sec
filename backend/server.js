@@ -8,6 +8,9 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Nascondi l'header X-Powered-By
+app.disable('x-powered-by');
+
 // Use Helmet to set various HTTP headers for security
 //app.use(helmet());
 
